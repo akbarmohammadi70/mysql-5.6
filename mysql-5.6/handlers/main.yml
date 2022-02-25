@@ -1,0 +1,17 @@
+---
+- name: Enable mysql
+  service:
+    name: mysql
+    enabled: yes
+
+- name: start mysql node
+  service:
+    name: mysql
+    state: started
+ 
+
+- name: galera_new_cluster
+  shell: sudo galera_new_cluster
+  delegate_to: db1
+
+

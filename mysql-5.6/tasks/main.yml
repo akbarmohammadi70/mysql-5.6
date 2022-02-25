@@ -1,0 +1,9 @@
+---
+# tasks file for mysql-5.6
+- name: prerequirments
+  include: requirments.yml
+  when: ansible_os_family == "Debian"
+
+- name: install mysql 5.6.51
+  include: install.yml
+  when: ansible_os_family == "Debian"

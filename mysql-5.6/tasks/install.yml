@@ -1,0 +1,37 @@
+---
+
+
+- name: add-apt-repository 
+  apt_repository:
+    repo: 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+    state: present
+
+- name: update
+  apt:
+    update-cache: yes
+  changed_when: 0
+  ignore_errors: yes
+
+- name: Install mysql 5.6
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mysql-server-5.6
+    - mysql-client-5.6
+    
+
+- name: unmask
+  command: "sudo systemctl unmask mysql.service"
+
+- name: start service
+  service:
+    name: mysql
+    state: started
+
+- name: enable service
+  service:
+    name: mysql
+    enabled: yes
+
+
